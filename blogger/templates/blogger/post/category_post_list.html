@@ -1,0 +1,14 @@
+{% extends "users/base.html" %}
+{% block blog_content %}
+<div class="col-md-8 offset-md-2">
+    {% for post in category_posts %}
+    <h2>Posts in the same category: {{ post.categories }}</h2>
+    <hr>
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <p class="date">
+            Published {{ post.publish }} by {{ post.author.first_name }} {{ post.author.last_name }} |&nbsp;
+        </p>
+        <p>{{ post.body|safe }}</p>
+    {% endfor %}
+</div>
+{% endblock blog_content %}

@@ -1,0 +1,68 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Contact Me Form{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="form-group">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <h2>Contact Me Form:</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {{ form.full_name }}
+                    </div>
+                    <br>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-at"></i>
+                        </span>
+                        {{ form.email }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                        {{ form.phone_number }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        {{ form.address }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </span>
+                        {{ form.message }}
+                    </div>
+                    <br>
+
+                    <button class="btn btn-success" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

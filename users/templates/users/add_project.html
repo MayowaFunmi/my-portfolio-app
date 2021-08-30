@@ -1,0 +1,76 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Add Project Form{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="form-group">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <h2>Add Project Form:</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-tasks"></i>
+                        </span>
+                        {{ form.name }}
+                    </div>
+                    <br>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-project-diagram"></i>
+                        </span>
+                        {{ form.description }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-project-diagram"></i>
+                        </span>
+                        {{ form.features }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-external-link-alt"></i>
+                        </span>
+                        {{ form.github_link }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-external-link-alt"></i>
+                        </span>
+                        {{ form.demo_link }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="far fa-images"></i>
+                        </span>
+                        {{ form.image }}
+                    </div>
+                    <br>
+
+                    <button class="btn btn-success" type="submit">Add Project</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

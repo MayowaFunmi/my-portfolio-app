@@ -1,0 +1,73 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Profile Update Form{% endblock %}
+
+{% block blog %}
+  {% include 'blogger_nav.html' %}
+{% endblock blog %}
+
+{% block blog_content %}
+    <h3>Fill the form below to update your profile</h3><hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update Profile">
+    </form>
+{% endblock blog_content %}
+
+
+<!--
+<p>
+    <form role="form" action="{% url 'users:save_update_candidate' %}" method="POST">
+
+            {{ form.middle_name.label_tag }}
+            <input type="text" value="{{ form.middle_name.value }}" id="middle_name">
+            {{ form.middle_name.help_text }}<br><br>
+
+            {{ form.gender.label_tag }}
+            <select name="gender">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <br><br>
+
+            {{ form.date_of_birth.label_tag }}
+            <input type="text" value="{{ form.date_of_birth.value }}" id="date_of_birth">
+            (Use {{ form.date_of_birth.help_text }})<br><br>
+
+            {{ form.age.label_tag }}
+            <input type="text" value="{{ form.age.value }}" id="age">
+            <br><br>
+
+            {{ form.address.label_tag }}
+            <input type="text" value="{{ form.address.value }}" id="address">
+            <br><br>
+
+            {{ form.religion.label_tag }}
+            <select name="religion">
+                <option>Christianity</option>
+                <option>Islam</option>
+            </select>
+            <br><br>
+
+            {{ form.phone_number.label_tag }}
+            <input type="text" value="{{ form.phone_number.value }}" id="phone_number">
+            <br><br>
+
+            {{ form.height.label_tag }}
+            <input type="text" value="{{ form.height.value }}" id="height">
+            <br><br>
+
+            {{ form.hobbies.label_tag }}
+            <input type="text" value="{{ form.hobbies.value }}" id="hobbies">
+            <br><br>
+
+            {{ form.profile_picture.label_tag }}<br>
+            Current Picture: <img src="{{ x.url }}" style="width: 200px; height: 200px; border-radius: 20px;"><br>
+            change photo: <input type="file" name="profile_picture"><br><br>
+
+            {{ form.about_me.label_tag }}
+            <input type="text" value="{{ form.about_me.value }}" id="about_me">
+            <br><br>
+        </p>
+-->

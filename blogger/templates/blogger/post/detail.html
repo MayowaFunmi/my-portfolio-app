@@ -1,0 +1,193 @@
+{% extends "blogger_base.html" %}
+{% block title %}Post Detail{% endblock %}
+
+{% block style %}
+<style>
+    .share-btn-container {
+        background: #fff;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 1px;
+        position: relative;
+        top: 30%;
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        font-size: 20px;
+    }
+
+    .share-btn-container a i {
+        font-size: 32px;
+    }
+
+    .share-btn-container a {
+        margin: 12px;
+        transition: 500ms;
+    }
+
+    .share-btn-container a:hover {
+        transform: scale(1.2);
+    }
+
+    .share-btn-container .facebook-btn {
+        background: #3b5998;
+        color: white;
+        padding: 20px;
+    }
+
+    .share-btn-container .twitter-btn {
+        background: #55ACEE;
+        color: white;
+        padding: 20px;
+    }
+
+    .share-btn-container .linkedin-btn {
+        background: #0077b5;
+        color: white;
+        padding: 20px;
+    }
+
+    .share-btn-container .whatsapp-btn {
+        background: #25d366;
+        color: white;
+        padding: 20px;
+    }
+
+    .share-btn-container .email-btn {
+        background: yellow;
+        color: white;
+        padding: 20px;
+    }
+
+</style>
+{% endblock style %}
+
+
+{% block blog_page %}
+
+    <div class="post_outer">
+        <article class="post">
+            <h2 class="post_title">{{ post.title }}</h2>
+                <small class="post_name">by {{ post.author.first_name }} {{ post.author.last_name }}</small>
+                <hr>
+            <div class="post_info">
+                <p class="date">
+                    {{ post.created }}
+                </p>
+            </div>
+            <div>
+                <div class="post_image">
+                    <img src="{{ post.post_image.url }}" style="width: 200px; height: 200px; border-radius: 20px;" alt="No Post Image">
+                </div>
+                {{ post.body|safe }}
+            </div>
+            <div>
+                {% if request.user == post.author %}
+                    <button class="read_more"><a href="{% url 'blogger:edit_post' post.id %}">Edit Post</a></button>
+                    <button class="tag_button"><a href="{% url 'blogger:post_list' %}">Back To All Posts</a></button>
+                {% else %}
+                    <button class="tag_button"><a href="{% url 'blogger:post_list' %}">Back To All Posts</a></button>
+                {% endif %}
+            </div>
+        </article>
+    </div>
+
+
+
+
+
+
+    <p><em>Share this post on your social media page:</em></p>
+
+    <div class="share-btn-container">
+        <a href="#" class="facebook-btn">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+
+        <a href="#" class="twitter-btn">
+            <i class="fab fa-twitter"></i>
+        </a>
+
+        <a href="#" class="linkedin-btn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a href="#" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <a  class="email-btn" href="{% url 'blogger:post_share' post.id %}">
+            <i class="far fa-envelope"></i>
+        </a>
+    </div>
+
+    <div>
+        <form action="{% url 'blogger:like_post' post.id post.publish.year post.publish.month post.publish.day post.slug %}" method="POST">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                {% if liked %}
+                    <button type="submit" name="post_id" value="{{ post.id }}">Unlike Post</button> - {{ post.total_likes }} Likes
+                {% else %}
+                    <button type="submit" name="post_id" value="{{ post.id }}">Like Post</button> - {{ post.total_likes }} Likes
+                {% endif %}
+            {% else %}
+                <small>Please Login to like this post</small>
+            {% endif %}
+        </form>
+    </div>
+
+    <h2>Similar posts</h2>
+    {% for post in similar_posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+    {% empty %}
+        There are no similar posts yet.
+    {% endfor %}
+
+
+
+
+    <div class="comments">
+        {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">
+                Comment {{ forloop.counter }} by {{ comment.name }}
+                {{ comment.created }}
+            </p>
+            {{ comment.body|linebreaks }}
+        </div>
+    {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+        <h2>Add another comment</h2>
+        <form method="post">
+            {{ comment_form.media }}
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+    {% else %}
+        <h2>Add a new comment</h2>
+        <form method="post">
+            {{ comment_form.media }}
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+    {% endif %}
+    </div>
+
+
+{% endblock blog_page %}

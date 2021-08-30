@@ -1,0 +1,26 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Sign Up Successful{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <h2>Thank You, {{ first_name }} {{ last_name }}.<br>You Have Successfully Registered</h2>
+                <div>
+                    Below Are Your Registration Details:
+                    <p>
+                        Username: {{ username }}<br>
+                        Email: {{ email }}<br>
+                        First Name: {{ first_name }}<br>
+                        Surname: {{ last_name }}<br>
+                    </p>
+                </div>
+                <button class="btn btn-primary">
+                    Proceed To <a href="{% url 'users:user_login' %}">Login</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

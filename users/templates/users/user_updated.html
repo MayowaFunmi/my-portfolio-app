@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+
+{% block title %}User Profile Created{% endblock title %}
+
+{% block blog %}
+  {% include 'blogger_nav.html' %}
+{% endblock blog %}
+
+
+{% block blog_content %}
+    <h2>Your Profile has been successfully created.</h2>
+    <a href="{% url 'users:profile_details' user.id %}">See Profile</a>
+{% endblock blog_content %}
