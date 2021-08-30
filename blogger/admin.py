@@ -33,7 +33,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 
-admin.site.site_header = 'My Blog Site Admin'
+admin.site.site_header = 'My Portfolio App Admin'
 
 '''
 from django.contrib import admin
