@@ -395,9 +395,6 @@ Media Queries
     .card {
         margin-bottom: 5px;
     }
-    .project_cards > .card {
-        width: 25rem;
-    }
 
     .blog_content {
         display: flex;
