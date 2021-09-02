@@ -356,7 +356,7 @@ header > #change_color {
 Media Queries
 */
 
-@media (min-width: 400px) and (max-width: 650px) {
+@media (max-width: 650px) {
     header {
         display: flex;
         flex-direction: column;
