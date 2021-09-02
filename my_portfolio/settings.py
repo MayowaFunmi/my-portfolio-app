@@ -17,7 +17,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR / 'templates'
 STATIC_DIR = BASE_DIR / 'static'
-MEDIA_DIR = BASE_DIR / 'media'
+#MEDIA_DIR = BASE_DIR / 'media'
+MEDIA_DIR = BASE_DIR / 'static/img'
 
 
 # Quick-start development settings - unsuitable for production
@@ -161,7 +162,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = MEDIA_DIR
 STATIC_ROOT = STATIC_DIR
 #STATICFILES_DIRS = [STATIC_DIR]
-MEDIA_URL = '/media/'
+MEDIA_URL = '/img/'
+#MEDIA_URL = '/media/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOW_CREDENTIALS = True # to accept cookies via ajax request
