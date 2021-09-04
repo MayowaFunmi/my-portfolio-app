@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import sys
 from datetime import timedelta
 from pathlib import Path
+from decouple import config
 import cloudinary
 import cloudinary_storage
 
@@ -27,10 +28,10 @@ MEDIA_DIR = BASE_DIR / 'static/img'
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v9!r0*&z*!$14bp4f$0++0!-uzd_df=0sye6s2zomi6o+i+0p3'
 
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['127.0.0.1', 'affabledigitalservices.herokuapp.com']
 
@@ -112,10 +113,10 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'my_portfolio',
-        'USER': 'mayowafunmi',
-        'PASSWORD': 'mayowafunmi',
-        'HOST': 'localhost',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
         'PORT': '5432',
     }
 }
@@ -163,10 +164,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'affable-digital-services',
-    'API_KEY': '643472186327511',
-    'API_SECRET': 'FsOCOsbW1Y8uD_2b4oHlDU9z3aI',
-    'API_ENVIRONMENT_VARIABLE': 'CLOUDINARY_URL=cloudinary://643472186327511:FsOCOsbW1Y8uD_2b4oHlDU9z3aI@affable-digital-services'
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+    'API_ENVIRONMENT_VARIABLE': config('API_ENVIRONMENT_VARIABLE')
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -219,9 +220,9 @@ SIMPLE_JWT = {
 }
 SITE_ID = 1
 TAGGIT_CASE_INSENSITIVE = True
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
