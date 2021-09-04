@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import sys
 from datetime import timedelta
 from pathlib import Path
+import cloudinary
+import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -65,6 +67,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -157,6 +161,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+# Cloudinary stuff
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'affable-digital-services',
+    'API_KEY': '643472186327511',
+    'API_SECRET': 'FsOCOsbW1Y8uD_2b4oHlDU9z3aI',
+    'API_ENVIRONMENT_VARIABLE': 'CLOUDINARY_URL=cloudinary://643472186327511:FsOCOsbW1Y8uD_2b4oHlDU9z3aI@affable-digital-services'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = MEDIA_DIR
